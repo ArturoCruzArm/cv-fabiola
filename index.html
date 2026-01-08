@@ -524,7 +524,31 @@
         <div class="nombre">María Fabiola Calvillo Rocha</div>
         <div style="color: #333; font-weight: bold;">Licenciada en Contaduría Pública</div>
         <div style="color: #666; font-style: italic;">Cédula Profesional: 11087841</div>
-        <div class="fecha">León, Guanajuato, 15 de septiembre de 2025</div>
+        <div class="fecha" id="fecha-actual">León, Guanajuato, <span id="fecha-dinamica">15 de septiembre de 2025</span></div>
     </div>
+
+    <script>
+        // Actualizar fecha automáticamente cuando se carga la página
+        function actualizarFecha() {
+            const meses = [
+                'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+            ];
+
+            const fechaActual = new Date();
+            const dia = fechaActual.getDate();
+            const mes = meses[fechaActual.getMonth()];
+            const año = fechaActual.getFullYear();
+
+            const fechaFormateada = `${dia} de ${mes} de ${año}`;
+            document.getElementById('fecha-dinamica').textContent = fechaFormateada;
+        }
+
+        // Ejecutar al cargar la página
+        actualizarFecha();
+
+        // También ejecutar antes de imprimir/generar PDF
+        window.addEventListener('beforeprint', actualizarFecha);
+    </script>
 </body>
 </html>
