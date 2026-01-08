@@ -281,7 +281,43 @@
             color: #666;
             margin-top: 5px;
         }
-        
+
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.6);
+            background: linear-gradient(135deg, #218838 0%, #1aa179 100%);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        @media print {
+            .download-btn {
+                display: none;
+            }
+        }
+
         .education {
             background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
             padding: 15px;
@@ -306,6 +342,12 @@
     </style>
 </head>
 <body>
+    <!-- Botón de descarga -->
+    <button class="download-btn" onclick="descargarPDF()">
+        <span style="font-size: 20px;">📥</span>
+        Descargar PDF
+    </button>
+
     <!-- Membrete Oficial -->
     <div class="membrete">
         <img src="./leon%20450%20azul.jpeg" alt="León 450 Aniversario - Gobierno PAN" class="leon-450-principal">
@@ -542,6 +584,18 @@
 
             const fechaFormateada = `${dia} de ${mes} de ${año}`;
             document.getElementById('fecha-dinamica').textContent = fechaFormateada;
+        }
+
+        // Función para descargar como PDF
+        function descargarPDF() {
+            // Actualizar la fecha antes de generar el PDF
+            actualizarFecha();
+
+            // Pequeño delay para asegurar que la fecha se actualice
+            setTimeout(function() {
+                // Abrir el diálogo de impresión (permite guardar como PDF)
+                window.print();
+            }, 100);
         }
 
         // Ejecutar al cargar la página
